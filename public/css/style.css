@@ -1,0 +1,59 @@
+table {
+    max-width: 50%;
+    margin: auto;
+}
+
+table img{
+    width: 45px;
+}
+
+td{
+    width: 250px;
+    text-align: center;
+}
+
+th{
+    width: 250px;
+    background-color: aquamarine;
+}
+
+.background_table{
+    background-color: lightyellow;
+}
+
+.center_button{
+    text-align: center;
+}
+
+.title{
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+}
+
+.listaProd{
+    margin-top: 120px;
+    margin-bottom: 120px;
+    height: 200px;
+    background-color: cornflowerblue;
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+}
+
+.mailBlue{
+    color: blue;
+    font-weight: bold;
+}
+
+.dateRed{
+    color: brown;
+    font-weight: normal;
+}
+
+.mensajeGreen{
+    color: green;
+    font-style: italic;
+}

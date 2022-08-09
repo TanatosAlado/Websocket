@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="http://localhost:2882/css/style.css">
+        <link href="css/bootstrap.min.css"/>
+        <title>Handlebars</title>
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+        integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      />
+    </head>
+
+    <body>
+
+        <h2>Bienvenida... desde aqui se puede probar Handlebars</h2>
+        <br>
+        <br>
+        <!-- <fieldset>
+            <h2>Prueba GET productos</h2>
+            <h3>Presione para traer todos los productos</h3>
+            <form action="/api/productos" method="GET">
+                <button>Traer</button>
+            </form>
+        </fieldset>
+        <br>
+        <br> -->
+
+        <!-- <fieldset>
+            <h2>Prueba GET productos (con ID)</h2>
+            <h3>Indique el producto que quiere traer</h3>
+            <form action= "/api/productos"  method="GET">
+                ID: <input type="text" name="id" />
+                <button>Traer</button>
+            </form>
+        </fieldset> -->
+
+        <fieldset>
+            <h2>Prueba POST</h2>
+            <h3>Ingrese Datos Productos</h3>
+        <form action="/api/productos" method="POST">
+        
+            Nombre: <input type="text" id="title" name="title" required/>
+            Precio: <input type="number" id="price" name="price" required/>
+            URL Imagen: <input type="text" id="img" name="img" required/>
+            <button onclick="enviarProd()">Enviar</button>
+        </form>
+        </fieldset>
+        
+        <fieldset>
+            <div id="products">
+                
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="ui container">
+                <div class="ui grid">
+                    <div class="eight wide column">
+                        <div class="ui container">
+                            <h1>Mensajes</h1>
+                            <div id="posts"></div>
+                        </div>
+                    </div>
+                    <div class="eight wide column">
+                        <div class="card">
+                            <div class="ui container">
+                                <h1>Enviar mensaje</h1>
+                                <div class="ui form">
+                                    <div class="field">
+                                        <label>Mail: </label>
+                                        <input type="email" id="email" placeholder="Ingrese su mail" required>
+                                        <!-- <input type="email" name="nombre" id="email" required/> -->
+                                    </div>
+                                    <div class="field">
+                                        <label>Mensaje: </label>
+                                        <textarea name="mensaje" id="mensaje" required></textarea>
+                                    </div>
+                                    <div class="field">
+                                        <button class="ui primary button" onclick="enviarMensaje()">
+                                            <i class="send icon"></i>
+                                            Enviar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <script
+            src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+            integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+            crossorigin="anonymous"
+        ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./js/main.js"></script>
+
+        <!-- <fieldset>
+            <h2>Prueba PUT</h2>
+            <h3>Ingrese Datos Producto a actualizar</h3>
+        <form action="/api/productos" method="PUT">
+            ID: <input type="text" name="id" />
+            Nombre: <input type="text" name="nombre" />
+            Apellido: <input type="text" name="apellido" />
+            <button>Enviar</button>
+        </form>
+        </fieldset>
+
+        <fieldset>
+            <h2>Prueba DELETE producto (con ID)</h2>
+            <h3>Indique el producto que quiere eliminar</h3>
+            <form action= "/api/productos"  method="DELETE">
+                ID: <input type="text" name="id" />
+                <button>Eliminar</button>
+            </form>
+        </fieldset> -->
+
+    </body>
+
+</html>

@@ -1,0 +1,21 @@
+<p class="title">Nuestros Vinos - HANDLEBARS</p>
+
+<BR>
+<table class="table">
+        <thead>
+            <tr class="bg-success">
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Imagen</th>
+            </tr>
+        </thead>
+{{#each products}}
+        <tbody>
+            <tr class="background_table">
+               <td>{{this.title}}</td>
+               <td> {{this.price}}</td>
+               <td><img srcSet={{this.img}} sizes="(min-width: 10px)"/></td>                
+            </tr>
+        </tbody>
+        {{/each}}
+</table>
