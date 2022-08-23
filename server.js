@@ -12,12 +12,16 @@ const handlebars = require("express-handlebars");
 
 const { Router } = express;
 
-///BD
-
+///BD MariaDB
 const knex = require('knex');
 const knexConfig = require('./knexfile')
 const database = knex(knexConfig);
+///BD
 
+///BD SQLite
+const knexChat = require('knex');
+const knexConfigChat = require('./knexfile_chat')
+const databaseChat = knexChat(knexConfigChat);
 ///BD
 
 
