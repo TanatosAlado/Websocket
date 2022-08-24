@@ -49,16 +49,15 @@ function enviarProd(){
 
 
 socket.on("productos_registrados", (products) => {
-  console.log(products);
-  const url = "http://localhost:2882/productos.hbs";
+  
+  const url = "http://localhost:8080/productos.hbs";
     fetch(url).then((resp) => {
-      console.log(resp);
+  
       return resp.text();
   }).then((text) => {
     const template = Handlebars.compile(text);
     const html = template({products: products});
     document.querySelector("#products").innerHTML = html;
-    //document.getElementById('products').innerHTML = html;
   });
 })
 

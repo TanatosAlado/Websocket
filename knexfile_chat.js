@@ -1,9 +1,19 @@
-// require ("dotenv").config();
+require ("dotenv").config();
+
+const DATABASE_HOST = process.env.DATABASE_HOST || "localhost";
+const DATABASE_PORT = process.env.DATABASE_PORT || "3306";
+const DATABASE_USER = process.env.DATABASE_USER || "root";
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD || "";
+const DATABASE_NAME = process.env.DATABASE_NAME || "productos_db";
 
 const knexConfigChat = {
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-      filename: 'ecommerce.sqlite'
+      host: DATABASE_HOST,
+      port: DATABASE_PORT,
+      user: DATABASE_USER,
+      password: DATABASE_PASSWORD,
+      database: DATABASE_NAME,
     },
     useNullAsDefault: true,
     migration: {

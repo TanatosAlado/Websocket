@@ -18,7 +18,7 @@ const knexConfig = require('./knexfile')
 const database = knex(knexConfig);
 ///BD
 
-///BD SQLite
+///BD MariaDB
 const knexChat = require('knex');
 const knexConfigChat = require('./knexfile_chat')
 const databaseChat = knexChat(knexConfigChat);
@@ -51,23 +51,17 @@ app.use("/api/productos", routerProducto);
 
 app.get("/", (req, res) => {
     res.render("index");
-    // res.sendFile(__dirname + "/public/index.html");
   });
 
 routerProducto.get("/", (req,res) => {
-    // myWine.getAll()
-    //     .then((products)=> res.render("losProductos", {products}))
     database('misproductos').select()
         .then(productos => {
             res.send(productos)
         })
-        // .then((products)=> res.render("losProductos", {products}))
         .catch(error => {res.send(error)})
 })
 
 routerProducto.get("/:id", async(req,res) => {
-    // myWine.getById(req.params.id)
-    //     .then((product)=>res.json(product))
     try{
         const id = req.params.id;
         const _persona = await database('misproductos')
@@ -81,13 +75,12 @@ routerProducto.get("/:id", async(req,res) => {
 })
 
 routerProducto.post("/", async(req,res) => {
-    // myWine.save(req.body)
-    //     res.redirect("/");
     const body = req.body;
     if (body.nombre && body.precio){
         const _vino = {
             nombre: body.nombre,
-            precio: body.precio
+            precio: body.precio,
+            img: body.img
         }
         try {
             const _resultado = await database('misproductos').insert(_vino);
@@ -121,9 +114,7 @@ routerProducto.put("/:id", async(req,res) => {
             }catch (err) {
                 res.send(err)    
             }
-           
         }    
-
 })
 
 routerProducto.delete("/:id", async(req,res) => {
@@ -142,7 +133,7 @@ routerProducto.delete("/:id", async(req,res) => {
 })
 
 // const server = app.listen(port, ()=>{
-    const PORT = process.env.PORT || 2882
+    const PORT = process.env.PORT || 8080
     httpServer.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 })
@@ -164,20 +155,35 @@ app.get('/', (req, res) => {
             `)
 })
 
-socketServer.on("connection", (socket) => {
+socketServer.on("connection", async (socket) => {
     console.log('Nuevo client conectado');
+
+    //Carga historial de mensajes
     socketServer.emit("INIT", "Bienvenido al WebSocket", messages);
 
+    //Carga productos registrados
     socketServer.emit(
         "productos_registrados",
-      myWine.getAll()),
+        await database('misproductos').select());
+
+    //Actualiza los mensajes cuando se ingresa uno nuevo    
+    socketServer.emit(
+        events.UPDATE_MESSAGES,
+        "Welcome to the Jaguar House",
+        await databaseChat('ecommerce').select(),
+    )
   
-    socket.on("POST_MESSAGE", (msg)=>{
+    socket.on("POST_MESSAGE", async (msg)=>{
         let aDate = new Date; 
         const _msg = {...msg, date: aDate.toGMTString()};
         messages.push(_msg);
-        console.log(_msg);
         socketServer.sockets.emit("NEW_MESSAGE", _msg);
+        try{
+            const _resultado = await databaseChat('ecommerce').insert(_msg);
+        }
+        catch (err) {
+            res.send(err)
+        }
     });
 
     socket.on(events.POST_PRODUCTS, (prod) => {

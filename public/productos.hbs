@@ -12,8 +12,10 @@
 {{#each products}}
         <tbody>
             <tr class="background_table">
-               <td>{{this.title}}</td>
-               <td> {{this.price}}</td>
+               {{!-- <td>{{this.title}}</td>
+               <td> {{this.price}}</td> --}}
+               <td>{{this.nombre}}</td>
+               <td> {{this.precio}}</td>
                <td><img srcSet={{this.img}} sizes="(min-width: 10px)"/></td>                
             </tr>
         </tbody>
